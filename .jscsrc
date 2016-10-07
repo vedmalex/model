@@ -1,0 +1,14 @@
+{
+  "preset": "google",
+  "maximumLineLength": null,
+  "esnext": true,
+  "disallowSpacesInsideObjectBrackets": null,
+  "jsDoc": {
+    "checkAnnotations": {
+      "preset": "jsdoc3",
+      "extra": {
+        "jsx": true
+      }
+    }
+  }
+}

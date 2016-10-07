@@ -1,0 +1,111 @@
+<model>
+  <entity name='Dictionary/Currency'>
+    <field name='name' identity/>
+    <field name='signature' required/>
+  </entity>;
+
+  <entity name='Inventory/Warehouse'>
+    <field name='name' identity />
+    <field name='regularityMin' type='number' default='1'/>
+    <field name='regularityMax' type='number' default='1'/>
+  </entity>
+
+  <entity name='Inventory/WarehouseItem'>
+    <field name='name' required/>
+    <field name='sku' required>
+      <belongsTo ref='Catalog/ToolPart#sku' name/>
+    </field>
+    <field name='manufacturer' required/>
+    <field name='price' type='number'/>
+    <field name='currency' required>
+      <belongsTo ref='Dictionary/Currency#name'/>
+    </field>
+    <field name='lastUpdate' type='datetime'/>
+    <field name='warehouse' required>
+      <belongsTo ref='Inventory/Warehouse#name'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/ImagePath'>
+    <field name='path' required/>
+    <field name='viewItem'>
+      <belongsTo ref='Catalog/ToolDetailViewItem'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/ToolPart'>
+    <field name='name' required/>
+    <field name='sku' identity/>
+    <field name='inventoryItems'>
+      <hasMany ref='Catalog/ToolDetailViewItem#sku'/>
+    </field>
+    <field name='manufacturer' required>
+      <belongsTo ref='Manufacturer#name'/>
+    </field>
+    <field name='warehouseItems'>
+      <hasMany ref='Catalog/WarehouseItem#sku'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/Category'>
+    <field name='name' identity/>
+    <field name='parent'>
+      <belongsTo ref='Catalog/Category#name'/>
+    </field>
+    <field name='children'>
+      <hasMany ref='Catalog/Category#name'/>
+    </field>
+    <field name='manufacturer' required>
+      <hasMany name='ManufacturerCategory' ref='Catalog/Manufacturer#name'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/Manufacturer'>
+    <field name='name' identity/>
+    <field name='activeCategory'>
+      <hasMany name='ManufacturerCategory' ref='Category#name'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/Tool'>
+    <field name='sku' identity/>
+    <field name='name' identity/>
+    <field name='description' identity/>
+    <field name='manufacturer'>
+      <belongsTo ref='Catalog/Manufacturer#name'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/ToolDetail'>
+    <field name='name'/>
+    <field name='tool'>
+      <belongsTo ref='Catalog/Tool#sku'/>
+    </field>
+    <field name='picture'>
+      <belongsTo ref='Catalog/ImagePath#path'/>
+    </field>
+    <field name='items'>
+      <belongsTo ref='Catalog/ToolDetailViewItem'/>
+    </field>
+  </entity>
+
+  <entity name='Catalog/ToolDetailViewItem'>
+    <field name='sku'>
+      <belongsTo ref='Catalog/ToolPart#sku'/>
+    </field>
+    <field name='key'/>
+    <field name='lv'/>
+    <field name='description'/>
+    <field name='qty'/>
+    <field name='standart'/>
+    <field name='note1'/>
+    <field name='note2'/>
+    <field name='note3'/>
+    <field name='imagePaths'>
+      <hasMany ref='ImagePath'/>
+    </field>
+    <field name='view'>
+      <hasMany ref='Catalog/ToolDetail'/>
+    </field>
+  </entity>
+</model>
