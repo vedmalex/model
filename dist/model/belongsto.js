@@ -51,7 +51,7 @@ var BelongsTo = exports.BelongsTo = function (_RefBase) {
   function BelongsTo(obj) {
     _classCallCheck(this, BelongsTo);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(BelongsTo).call(this, obj));
+    return _possibleConstructorReturn(this, (BelongsTo.__proto__ || Object.getPrototypeOf(BelongsTo)).call(this, obj));
   }
 
   _createClass(BelongsTo, [{
@@ -66,13 +66,13 @@ var BelongsTo = exports.BelongsTo = function (_RefBase) {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
-        _get(Object.getPrototypeOf(BelongsTo.prototype), 'updateWith', this).call(this, obj);
+        _get(BelongsTo.prototype.__proto__ || Object.getPrototypeOf(BelongsTo.prototype), 'updateWith', this).call(this, obj);
 
         var result = this.$obj ? _extends({}, this.$obj) : {};
 
         var belongsTo_ = obj.belongsTo;
 
-        var belongsTo = undefined;
+        var belongsTo = void 0;
         if (belongsTo_) {
           belongsTo = new _ref.Ref();
           var res = belongsTo_.match(_definitions.REF_PATTERN);
@@ -93,7 +93,7 @@ var BelongsTo = exports.BelongsTo = function (_RefBase) {
     key: 'toObject',
     value: function toObject() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(BelongsTo.prototype), 'toObject', this).call(this);
+      var res = _get(BelongsTo.prototype.__proto__ || Object.getPrototypeOf(BelongsTo.prototype), 'toObject', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         belongsTo: props.belongsTo ? props.belongsTo.toString() : undefined
       })));
@@ -105,7 +105,7 @@ var BelongsTo = exports.BelongsTo = function (_RefBase) {
     key: 'toJSON',
     value: function toJSON() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(BelongsTo.prototype), 'toJSON', this).call(this);
+      var res = _get(BelongsTo.prototype.__proto__ || Object.getPrototypeOf(BelongsTo.prototype), 'toJSON', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         belongsTo: props.belongsTo_
       })));

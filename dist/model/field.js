@@ -62,7 +62,7 @@ var Field = exports.Field = function (_FieldBase) {
   function Field(obj) {
     _classCallCheck(this, Field);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Field).call(this, obj));
+    return _possibleConstructorReturn(this, (Field.__proto__ || Object.getPrototypeOf(Field)).call(this, obj));
   }
 
   _createClass(Field, [{
@@ -77,7 +77,7 @@ var Field = exports.Field = function (_FieldBase) {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
-        _get(Object.getPrototypeOf(Field.prototype), 'updateWith', this).call(this, obj);
+        _get(Field.prototype.__proto__ || Object.getPrototypeOf(Field.prototype), 'updateWith', this).call(this, obj);
         var result = this.$obj ? _extends({}, this.$obj) : {};
 
         var type_ = obj.type;
@@ -89,11 +89,17 @@ var Field = exports.Field = function (_FieldBase) {
         var required_ = obj.required;
         var required = required || false;
 
+        var indexed_ = obj.indexed;
+        var indexed = indexed || identity;
+
         result.type_ = type_;
         result.type = type;
 
         result.identity_ = identity_;
         result.identity = identity;
+
+        result.indexed_ = indexed_;
+        result.indexed = indexed;
 
         if (result.identity) {
           // это то как выглядит ключ для внешних ссылок
@@ -105,7 +111,7 @@ var Field = exports.Field = function (_FieldBase) {
 
         if (obj.relation) {
           var relation_ = obj.relation;
-          var relation = undefined;
+          var relation = void 0;
 
           switch (discoverFieldType(relation_)) {
             case 'HasOne':
@@ -137,11 +143,12 @@ var Field = exports.Field = function (_FieldBase) {
     key: 'toObject',
     value: function toObject() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(Field.prototype), 'toObject', this).call(this);
+      var res = _get(Field.prototype.__proto__ || Object.getPrototypeOf(Field.prototype), 'toObject', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         type: props.type || props.type_,
         identity: props.identity || props.identity_,
         required: props.required || props.required_,
+        indexed: props.indexed || props.indexed_,
         idKey: props.idKey ? props.idKey.toString() : undefined,
         relation: props.relation ? props.relation.toObject() : undefined
       })));
@@ -153,11 +160,12 @@ var Field = exports.Field = function (_FieldBase) {
     key: 'toJSON',
     value: function toJSON() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(Field.prototype), 'toJSON', this).call(this);
+      var res = _get(Field.prototype.__proto__ || Object.getPrototypeOf(Field.prototype), 'toJSON', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         type: props.type_,
         identity: props.identity_,
         required: props.required_,
+        indexed: props.indexed_,
         relation: props.relation ? props.relation.toJSON() : undefined
       })));
     }

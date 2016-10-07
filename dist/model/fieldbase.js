@@ -29,7 +29,7 @@ var FieldBase = exports.FieldBase = function (_ModelBase) {
   function FieldBase(obj) {
     _classCallCheck(this, FieldBase);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FieldBase).call(this, obj));
+    return _possibleConstructorReturn(this, (FieldBase.__proto__ || Object.getPrototypeOf(FieldBase)).call(this, obj));
   }
 
   _createClass(FieldBase, [{
@@ -44,7 +44,7 @@ var FieldBase = exports.FieldBase = function (_ModelBase) {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
-        _get(Object.getPrototypeOf(FieldBase.prototype), 'updateWith', this).call(this, obj);
+        _get(FieldBase.prototype.__proto__ || Object.getPrototypeOf(FieldBase.prototype), 'updateWith', this).call(this, obj);
 
         var result = this.$obj ? _extends({}, this.$obj) : {};
 
@@ -64,7 +64,7 @@ var FieldBase = exports.FieldBase = function (_ModelBase) {
     key: 'toObject',
     value: function toObject() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(FieldBase.prototype), 'toObject', this).call(this);
+      var res = _get(FieldBase.prototype.__proto__ || Object.getPrototypeOf(FieldBase.prototype), 'toObject', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         entity: props.entity || props.entity_
       })));
@@ -76,7 +76,7 @@ var FieldBase = exports.FieldBase = function (_ModelBase) {
     key: 'toJSON',
     value: function toJSON() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(FieldBase.prototype), 'toJSON', this).call(this);
+      var res = _get(FieldBase.prototype.__proto__ || Object.getPrototypeOf(FieldBase.prototype), 'toJSON', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res)));
     }
   }, {

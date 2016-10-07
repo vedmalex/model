@@ -10,7 +10,7 @@ var Role = create(
 
 var User = create(
   'entity',
-  { name: 'User', title: 'Пользователь' },
+  { name: 'User', title: '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C' },
   create('field', { name: 'name' }),
   create('field', { name: 'password' }),
   create('field', { name: 'birthDate', type: 'datetime' }),

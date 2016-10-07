@@ -7,6 +7,8 @@ exports.BelongsToManySchema = exports.BelongsToSchema = exports.HasManySchema = 
 
 var _modelbase = require('./modelbase');
 
+var _refbase = require('./refbase');
+
 var _entity = require('./entity');
 
 var _ref = require('./ref');
@@ -20,8 +22,6 @@ var _hasmany = require('./hasmany');
 var _belongsto = require('./belongsto');
 
 var _belongstomany = require('./belongstomany');
-
-var _refbase = require('./refbase');
 
 exports.ModelBaseSchema = _modelbase.ModelBaseSchema;
 exports.RefBaseSchema = _refbase.RefBaseSchema;

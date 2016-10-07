@@ -51,7 +51,7 @@ var HasOne = exports.HasOne = function (_RefBase) {
   function HasOne(obj) {
     _classCallCheck(this, HasOne);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(HasOne).call(this, obj));
+    return _possibleConstructorReturn(this, (HasOne.__proto__ || Object.getPrototypeOf(HasOne)).call(this, obj));
   }
 
   _createClass(HasOne, [{
@@ -66,13 +66,13 @@ var HasOne = exports.HasOne = function (_RefBase) {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
-        _get(Object.getPrototypeOf(HasOne.prototype), 'updateWith', this).call(this, obj);
+        _get(HasOne.prototype.__proto__ || Object.getPrototypeOf(HasOne.prototype), 'updateWith', this).call(this, obj);
 
         var result = this.$obj ? _extends({}, this.$obj) : {};
 
         var hasOne_ = obj.hasOne;
 
-        var hasOne = undefined;
+        var hasOne = void 0;
         if (hasOne_) {
           hasOne = new _ref.Ref();
           var res = hasOne_.match(_definitions.REF_PATTERN);
@@ -93,7 +93,7 @@ var HasOne = exports.HasOne = function (_RefBase) {
     key: 'toObject',
     value: function toObject() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(HasOne.prototype), 'toObject', this).call(this);
+      var res = _get(HasOne.prototype.__proto__ || Object.getPrototypeOf(HasOne.prototype), 'toObject', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         hasOne: props.hasOne ? props.hasOne.toString() : undefined
       })));
@@ -105,7 +105,7 @@ var HasOne = exports.HasOne = function (_RefBase) {
     key: 'toJSON',
     value: function toJSON() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(HasOne.prototype), 'toJSON', this).call(this);
+      var res = _get(HasOne.prototype.__proto__ || Object.getPrototypeOf(HasOne.prototype), 'toJSON', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         hasOne: props.hasOne_
       })));

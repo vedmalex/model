@@ -51,7 +51,7 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
   function BelongsToMany(obj) {
     _classCallCheck(this, BelongsToMany);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(BelongsToMany).call(this, obj));
+    return _possibleConstructorReturn(this, (BelongsToMany.__proto__ || Object.getPrototypeOf(BelongsToMany)).call(this, obj));
   }
 
   _createClass(BelongsToMany, [{
@@ -66,7 +66,7 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
-        _get(Object.getPrototypeOf(BelongsToMany.prototype), 'updateWith', this).call(this, obj);
+        _get(BelongsToMany.prototype.__proto__ || Object.getPrototypeOf(BelongsToMany.prototype), 'updateWith', this).call(this, obj);
 
         var result = this.$obj ? _extends({}, this.$obj) : {};
 
@@ -74,7 +74,7 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
 
         var using_ = obj.using;
 
-        var belongsToMany = undefined;
+        var belongsToMany = void 0;
         if (belongsToMany_) {
           belongsToMany = new _ref.Ref();
           var res = belongsToMany_.match(_definitions.REF_PATTERN);
@@ -82,12 +82,12 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
           belongsToMany.field = res[2] ? (0, _camelcase2.default)(res[2].trim()) : '';
         }
 
-        var using = undefined;
+        var using = void 0;
         if (using_) {
           using = new _ref.Ref();
-          var res = using_.match(_definitions.REF_PATTERN);
-          using.entity = res[1] || obj.name || obj.entity;
-          using.field = res[2] ? (0, _camelcase2.default)(res[2].trim()) : obj.entity.toLowerCase();
+          var _res = using_.match(_definitions.REF_PATTERN);
+          using.entity = _res[1] || obj.name || obj.entity;
+          using.field = _res[2] ? (0, _camelcase2.default)(_res[2].trim()) : obj.entity.toLowerCase();
         } else {
           using = new _ref.Ref((obj.name || obj.entity) + '#' + obj.entity.toLowerCase());
         }
@@ -111,7 +111,7 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
     key: 'toObject',
     value: function toObject() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(BelongsToMany.prototype), 'toObject', this).call(this);
+      var res = _get(BelongsToMany.prototype.__proto__ || Object.getPrototypeOf(BelongsToMany.prototype), 'toObject', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         belongsToMany: props.belongsToMany ? props.belongsToMany.toString() : undefined,
         using: props.using ? props.using.toString() : undefined
@@ -124,7 +124,7 @@ var BelongsToMany = exports.BelongsToMany = function (_RefBase) {
     key: 'toJSON',
     value: function toJSON() {
       var props = this.$obj;
-      var res = _get(Object.getPrototypeOf(BelongsToMany.prototype), 'toJSON', this).call(this);
+      var res = _get(BelongsToMany.prototype.__proto__ || Object.getPrototypeOf(BelongsToMany.prototype), 'toJSON', this).call(this);
       return JSON.parse(JSON.stringify(_extends({}, res, {
         belongsToMany: props.belongsToMany_,
         using: props.using_

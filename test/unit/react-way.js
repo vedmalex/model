@@ -36,7 +36,7 @@ describe('react-way', ()=> {
       expect(()=> e.identity = 'someThing').to.throw();
       expect(()=> e.fields = 'someThing').to.throw();
 
-    });
+    });DEFAULT_ID_FIELD
 
     it('default data is undefined',() => {
       let e = <Entity/>;

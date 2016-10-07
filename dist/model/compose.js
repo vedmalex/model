@@ -20,7 +20,7 @@ var _belongsto = require('./belongsto');
 var _belongstomany = require('./belongstomany');
 
 function compose(T_, props) {
-  var T = undefined;
+  var T = void 0;
   if ('string' == typeof T_) {
     switch (T_.toLowerCase()) {
       case 'entity':

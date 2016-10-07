@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Entity = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -58,7 +58,7 @@ var Entity = exports.Entity = function (_ModelBase) {
   function Entity(obj) {
     _classCallCheck(this, Entity);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Entity).call(this, obj));
+    return _possibleConstructorReturn(this, (Entity.__proto__ || Object.getPrototypeOf(Entity)).call(this, obj));
   }
 
   _createClass(Entity, [{
@@ -78,7 +78,7 @@ var Entity = exports.Entity = function (_ModelBase) {
 
       if (modelPackage) {
         (function () {
-          var modelRelations = undefined;
+          var modelRelations = void 0;
           if (modelPackage.relations.has(_this3.name)) {
             modelRelations = modelPackage.relations.get(_this3.name);
           } else {
@@ -130,8 +130,8 @@ var Entity = exports.Entity = function (_ModelBase) {
             case 'HasMany':
               // must be in ref store
               if (modelPackage.entities.has(r.ref.entity)) {
-                var refe = modelPackage.entities.get(r.ref.entity);
-                if (refe.fields.has(r.ref.field)) {
+                var _refe = modelPackage.entities.get(r.ref.entity);
+                if (_refe.fields.has(r.ref.field)) {
                   missingRef = false;
                 }
               }
@@ -139,8 +139,8 @@ var Entity = exports.Entity = function (_ModelBase) {
             case 'BelongsToMany':
               // must be in ref store
               if (modelPackage.entities.has(r.ref.entity)) {
-                var refe = modelPackage.entities.get(r.ref.entity);
-                if (refe.fields.has(r.ref.field)) {
+                var _refe2 = modelPackage.entities.get(r.ref.entity);
+                if (_refe2.fields.has(r.ref.field)) {
                   missingRef = false;
                 }
               } else {
@@ -199,7 +199,7 @@ var Entity = exports.Entity = function (_ModelBase) {
 
       if (obj) {
         (function () {
-          _get(Object.getPrototypeOf(Entity.prototype), 'updateWith', _this5).call(_this5, obj);
+          _get(Entity.prototype.__proto__ || Object.getPrototypeOf(Entity.prototype), 'updateWith', _this5).call(_this5, obj);
 
           var result = _this5.$obj ? _extends({}, _this5.$obj) : {};
 
@@ -234,7 +234,7 @@ var Entity = exports.Entity = function (_ModelBase) {
           });
 
           if (identity.size == 0) {
-            var f = undefined;
+            var f = void 0;
             if (fields.has('id')) {
               f = fields.get('id');
             } else if (fields.has('_id')) {
@@ -265,7 +265,7 @@ var Entity = exports.Entity = function (_ModelBase) {
 
       if (!modelPackage) {
         var props = this.$obj;
-        var res = _get(Object.getPrototypeOf(Entity.prototype), 'toObject', this).call(this);
+        var res = _get(Entity.prototype.__proto__ || Object.getPrototypeOf(Entity.prototype), 'toObject', this).call(this);
         return JSON.parse(JSON.stringify(_extends({}, res, {
           fields: [].concat(_toConsumableArray(props.fields.values())).map(function (f) {
             return f.toObject();
@@ -275,11 +275,11 @@ var Entity = exports.Entity = function (_ModelBase) {
         var _ret3 = function () {
           var modelRelations = modelPackage.relations.get(_this6.name);
           if (modelRelations) {
-            var props = _this6.$obj;
-            var res = _get(Object.getPrototypeOf(Entity.prototype), 'toObject', _this6).call(_this6);
+            var _props = _this6.$obj;
+            var _res = _get(Entity.prototype.__proto__ || Object.getPrototypeOf(Entity.prototype), 'toObject', _this6).call(_this6);
             return {
-              v: JSON.parse(JSON.stringify(_extends({}, res, {
-                fields: [].concat(_toConsumableArray(props.fields.values())).map(function (f) {
+              v: JSON.parse(JSON.stringify(_extends({}, _res, {
+                fields: [].concat(_toConsumableArray(_props.fields.values())).map(function (f) {
                   if (_this6.relations.has(f.name)) {
                     if (modelRelations.has(f.name)) {
                       return f.toObject(modelPackage);
@@ -305,7 +305,7 @@ var Entity = exports.Entity = function (_ModelBase) {
 
       if (!modelPackage) {
         var props = this.$obj;
-        var res = _get(Object.getPrototypeOf(Entity.prototype), 'toJSON', this).call(this);
+        var res = _get(Entity.prototype.__proto__ || Object.getPrototypeOf(Entity.prototype), 'toJSON', this).call(this);
         return JSON.parse(JSON.stringify(_extends({}, res, {
           fields: [].concat(_toConsumableArray(props.fields.values())).map(function (f) {
             return f.toJSON();
@@ -315,11 +315,11 @@ var Entity = exports.Entity = function (_ModelBase) {
         var _ret4 = function () {
           var modelRelations = modelPackage.relations.get(_this7.name);
           if (modelRelations) {
-            var props = _this7.$obj;
-            var res = _get(Object.getPrototypeOf(Entity.prototype), 'toJSON', _this7).call(_this7);
+            var _props2 = _this7.$obj;
+            var _res2 = _get(Entity.prototype.__proto__ || Object.getPrototypeOf(Entity.prototype), 'toJSON', _this7).call(_this7);
             return {
-              v: JSON.parse(JSON.stringify(_extends({}, res, {
-                fields: [].concat(_toConsumableArray(props.fields.values())).map(function (f) {
+              v: JSON.parse(JSON.stringify(_extends({}, _res2, {
+                fields: [].concat(_toConsumableArray(_props2.fields.values())).map(function (f) {
                   if (_this7.relations.has(f.name)) {
                     if (modelRelations.has(f.name)) {
                       return f.toJSON(modelPackage);

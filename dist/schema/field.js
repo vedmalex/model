@@ -25,10 +25,13 @@ var FieldSchema = exports.FieldSchema = {
       default: 'string'
     },
     default: {
-      type: { anyOf: [{ type: 'integer' }, { type: 'number' }, { type: 'boolean' }, { type: 'string' }, { type: 'null' }, { type: 'object' }] }
+      type: {
+        anyOf: [{ type: 'integer' }, { type: 'number' }, { type: 'boolean' }, { type: 'string' }, { type: 'null' }, { type: 'object' }]
+      }
     },
     identity: { type: 'boolean', default: false },
     required: { type: 'boolean', default: false },
+    indexed: { type: 'boolean', default: false },
     relation: {
       type: {
         anyOf: [{
