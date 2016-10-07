@@ -1,5 +1,5 @@
 {
-  "name": "dsl",
+  "name": "meta-model-dsl",
   "version": "0.0.1",
   "description": "",
   "main": "dist/model/index.js",
