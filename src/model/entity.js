@@ -215,6 +215,7 @@ export class Entity extends ModelBase {
       result.relations = relations;
       result.identity = identity;
       result.required = required;
+      result.indexed = indexed;
       result.fields = fields;
 
       this.$obj = {
