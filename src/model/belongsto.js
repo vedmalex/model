@@ -1,6 +1,4 @@
 import {RefBase} from './refbase';
-import {BelongsToSchema} from '../schema';
-import {validator} from '../validator';
 import {REF_PATTERN} from './definitions';
 import {Ref} from './ref';
 import camelcase from 'camelcase';
@@ -28,13 +26,6 @@ export class BelongsTo extends RefBase {
 
   get ref() {
     return this.$obj ? this.$obj.belongsTo : undefined;
-  }
-
-  validateSchema(obj) {
-    const validation = validator.validate(obj, BelongsToSchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
   }
 
   updateWith(obj) {

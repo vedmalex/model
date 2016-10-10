@@ -9,10 +9,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _schema = require('../schema');
-
-var _validator = require('../validator');
-
 var _camelcase = require('camelcase');
 
 var _camelcase2 = _interopRequireDefault(_camelcase);
@@ -60,21 +56,11 @@ var ModelBase = exports.ModelBase = function () {
       };
     }
   }, {
-    key: 'validateSchema',
-    value: function validateSchema(obj) {
-      var validation = _validator.validator.validate(obj, _schema.ModelBaseSchema);
-      if (!validation.valid) {
-        throw new Error(validation.toString());
-      }
-    }
-  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
 
         var result = this.$obj ? _extends({}, this.$obj) : {};
-
-        this.validateSchema(obj);
 
         var name_ = obj.name;
         var title_ = obj.title;

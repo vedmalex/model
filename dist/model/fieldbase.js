@@ -13,10 +13,6 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _modelbase = require('./modelbase');
 
-var _validator = require('../validator');
-
-var _schema = require('../schema');
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -33,14 +29,6 @@ var FieldBase = exports.FieldBase = function (_ModelBase) {
   }
 
   _createClass(FieldBase, [{
-    key: 'validateSchema',
-    value: function validateSchema(obj) {
-      var validation = _validator.validator.validate(obj, _schema.FieldSchema);
-      if (!validation.valid) {
-        throw new Error(validation.toString());
-      }
-    }
-  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {

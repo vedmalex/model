@@ -1,5 +1,3 @@
-import {RefBaseSchema} from '../schema';
-import {validator} from '../validator';
 import camelcase from 'camelcase';
 
 export class RefBase {
@@ -31,19 +29,10 @@ export class RefBase {
     };
   }
 
-  validateSchema(obj) {
-    const validation = validator.validate(obj, RefBaseSchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
-  }
-
   updateWith(obj) {
     if (obj) {
 
       const result = this.$obj ? {...this.$obj} : {};
-
-      this.validateSchema(obj);
 
       let name_ = obj.name;
 

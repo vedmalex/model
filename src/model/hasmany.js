@@ -1,6 +1,4 @@
 import {RefBase} from './refbase';
-import {HasManySchema} from '../schema';
-import {validator} from '../validator';
 import {REF_PATTERN} from './definitions';
 import {Ref} from './ref';
 import camelcase from 'camelcase';
@@ -28,13 +26,6 @@ export class HasMany extends RefBase {
 
   get ref() {
     return this.$obj ? this.$obj.hasMany : undefined;
-  }
-
-  validateSchema(obj) {
-    const validation = validator.validate(obj, HasManySchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
   }
 
   updateWith(obj) {

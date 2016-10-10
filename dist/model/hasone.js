@@ -13,10 +13,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _refbase = require('./refbase');
 
-var _schema = require('../schema');
-
-var _validator = require('../validator');
-
 var _definitions = require('./definitions');
 
 var _ref = require('./ref');
@@ -55,14 +51,6 @@ var HasOne = exports.HasOne = function (_RefBase) {
   }
 
   _createClass(HasOne, [{
-    key: 'validateSchema',
-    value: function validateSchema(obj) {
-      var validation = _validator.validator.validate(obj, _schema.HasOneSchema);
-      if (!validation.valid) {
-        throw new Error(validation.toString());
-      }
-    }
-  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {

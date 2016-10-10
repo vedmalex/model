@@ -1,1 +1,0 @@
-{"version":3,"sources":["schema/ref.js"],"names":["RefSchema","id","type","patern"],"mappings":";;;;;AAAO,IAAMA,gCAAY;AACvBC,MAAI,MADmB;AAEvBC,QAAM,QAFiB;AAGvBC,UAAQ;AAHe,CAAlB","file":"schema/ref.js","sourcesContent":["export const RefSchema = {\n  id: '/Ref',\n  type: 'string',\n  patern: '^(.*?)#(.*?)$',\n};\n"],"sourceRoot":"/source/"}

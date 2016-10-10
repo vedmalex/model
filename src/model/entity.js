@@ -4,13 +4,7 @@ import {HasOne} from './hasone';
 import {HasMany} from './hasmany';
 import {BelongsTo} from './belongsto';
 import {BelongsToMany} from './belongstomany';
-import {validator} from '../validator';
 import {DEFAULT_ID_FIELD} from './definitions';
-
-import {
-  FieldSchema,
-  EntitySchema,
-} from '../schema';
 
 export class Entity extends ModelBase {
 
@@ -156,11 +150,8 @@ export class Entity extends ModelBase {
     return this.$obj ? this.$obj.fields : undefined;
   }
 
-  validateSchema(obj) {
-    const validation = validator.validate(obj, EntitySchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
+  get indexed() {
+    return this.$obj ? this.$obj.indexed : undefined;
   }
 
   updateWith(obj) {
@@ -175,6 +166,7 @@ export class Entity extends ModelBase {
       const relations = new Set();
       const identity = new Set();
       const required = new Set();
+      const indexed = new Set();
 
       obj.fields.forEach(f => {
 
@@ -196,6 +188,10 @@ export class Entity extends ModelBase {
 
         if (field.relation) {
           relations.add(field.name);
+        }
+
+        if (field.indexed) {
+          indexed.add(field.name);
         }
 
       });

@@ -1,5 +1,3 @@
-import {ModelBaseSchema} from '../schema';
-import {validator} from '../validator';
 import camelcase from 'camelcase';
 import decamelize from 'decamelize';
 
@@ -46,19 +44,10 @@ export class ModelBase {
     };
   }
 
-  validateSchema(obj) {
-    const validation = validator.validate(obj, ModelBaseSchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
-  }
-
   updateWith(obj) {
     if (obj) {
 
       const result = this.$obj ? {...this.$obj} : {};
-
-      this.validateSchema(obj);
 
       let name_ = obj.name;
       let title_ = obj.title;

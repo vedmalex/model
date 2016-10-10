@@ -13,8 +13,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _fieldbase = require('./fieldbase');
 
-var _validator = require('../validator');
-
 var _entity = require('./entity');
 
 var _hasone = require('./hasone');
@@ -27,8 +25,6 @@ var _belongstomany = require('./belongstomany');
 
 var _ref = require('./ref');
 
-var _schema = require('../schema');
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -36,14 +32,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function discoverFieldType(obj) {
-  if (_validator.validator.validate(obj, _schema.HasOneSchema).valid) {
+  // сделать проверку по полю...
+  if (obj.hasOne) {
     return 'HasOne';
-  } else if (_validator.validator.validate(obj, _schema.HasManySchema).valid) {
+  } else if (obj.hasMany) {
     return 'HasMany';
-  } else if (_validator.validator.validate(obj, _schema.BelongsToSchema).valid) {
+  } else if (obj.belongsTo) {
     return 'BelongsTo';
-  } else if (_validator.validator.validate(obj, _schema.BelongsToManySchema).valid) {
+  } else if (obj.belongsToMany) {
     return 'BelongsToMany';
+  } else {
+    console.warn('undefined relation type of ' + JSON.stringify(obj));
+    return 'undefined';
   }
 };
 
@@ -66,14 +66,6 @@ var Field = exports.Field = function (_FieldBase) {
   }
 
   _createClass(Field, [{
-    key: 'validateSchema',
-    value: function validateSchema(obj) {
-      var validation = _validator.validator.validate(obj, _schema.FieldSchema);
-      if (!validation.valid) {
-        throw new Error(validation.toString());
-      }
-    }
-  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
@@ -126,6 +118,8 @@ var Field = exports.Field = function (_FieldBase) {
             case 'BelongsToMany':
               relation = new _belongstomany.BelongsToMany(_extends({}, relation_, { entity: obj.entity }));
               break;
+            case 'unknown':
+              relation = undefined;
           }
 
           result.relation = relation;
@@ -191,6 +185,11 @@ var Field = exports.Field = function (_FieldBase) {
     key: 'required',
     get: function get() {
       return this.$obj ? this.$obj.required : undefined;
+    }
+  }, {
+    key: 'indexed',
+    get: function get() {
+      return this.$obj ? this.$obj.indexed : undefined;
     }
   }, {
     key: 'idKey',

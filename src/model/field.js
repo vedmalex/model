@@ -1,5 +1,4 @@
 import {FieldBase} from './fieldbase';
-import {validator} from '../validator';
 import {Entity} from './entity';
 import {HasOne} from './hasone';
 import {HasMany} from './hasmany';
@@ -7,23 +6,19 @@ import {BelongsTo} from './belongsto';
 import {BelongsToMany} from './belongstomany';
 import {Ref} from './ref';
 
-import {
-  FieldSchema,
-  HasOneSchema,
-  HasManySchema,
-  BelongsToSchema,
-  BelongsToManySchema,
-} from '../schema';
-
 function discoverFieldType(obj) {
-  if (validator.validate(obj, HasOneSchema).valid) {
+  // сделать проверку по полю...
+  if (obj.hasOne) {
     return 'HasOne';
-  } else if (validator.validate(obj, HasManySchema).valid) {
+  } else if (obj.hasMany) {
     return 'HasMany';
-  } else if (validator.validate(obj, BelongsToSchema).valid) {
+  } else if (obj.belongsTo) {
     return 'BelongsTo';
-  } else if (validator.validate(obj, BelongsToManySchema).valid) {
+  } else if (obj.belongsToMany) {
     return 'BelongsToMany';
+  } else {
+    console.warn(`undefined relation type of ${JSON.stringify(obj)}`);
+    return 'undefined';
   }
 };
 
@@ -61,19 +56,16 @@ export class Field extends FieldBase {
     return this.$obj ? this.$obj.required : undefined;
   }
 
+  get indexed() {
+    return this.$obj ? this.$obj.indexed : undefined;
+  }
+
   get idKey() {
     return this.$obj ? this.$obj.idKey : undefined;
   }
 
   get relation() {
     return this.$obj ? this.$obj.relation : undefined;
-  }
-
-  validateSchema(obj) {
-    const validation = validator.validate(obj, FieldSchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
   }
 
   updateWith(obj) {
@@ -127,6 +119,8 @@ export class Field extends FieldBase {
           case 'BelongsToMany':
             relation = new BelongsToMany({...relation_, entity: obj.entity});
           break;
+          case 'unknown':
+            relation = undefined;
         }
 
         result.relation = relation;

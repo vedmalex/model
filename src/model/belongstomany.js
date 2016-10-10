@@ -1,6 +1,4 @@
 import {RefBase} from './refbase';
-import {BelongsToManySchema} from '../schema';
-import {validator} from '../validator';
 import {REF_PATTERN} from './definitions';
 import {Ref} from './ref';
 import camelcase from 'camelcase';
@@ -32,13 +30,6 @@ export class BelongsToMany extends RefBase {
 
   get ref() {
     return this.$obj ? this.$obj.belongsToMany : undefined;
-  }
-
-  validateSchema(obj) {
-    const validation = validator.validate(obj, BelongsToManySchema);
-    if (!validation.valid) {
-      throw new Error(validation.toString());
-    }
   }
 
   updateWith(obj) {

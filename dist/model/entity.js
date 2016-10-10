@@ -25,11 +25,7 @@ var _belongsto = require('./belongsto');
 
 var _belongstomany = require('./belongstomany');
 
-var _validator = require('../validator');
-
 var _definitions = require('./definitions');
-
-var _schema = require('../schema');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -185,14 +181,6 @@ var Entity = exports.Entity = function (_ModelBase) {
       });
     }
   }, {
-    key: 'validateSchema',
-    value: function validateSchema(obj) {
-      var validation = _validator.validator.validate(obj, _schema.EntitySchema);
-      if (!validation.valid) {
-        throw new Error(validation.toString());
-      }
-    }
-  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       var _this5 = this;
@@ -209,6 +197,7 @@ var Entity = exports.Entity = function (_ModelBase) {
           var relations = new Set();
           var identity = new Set();
           var required = new Set();
+          var indexed = new Set();
 
           obj.fields.forEach(function (f) {
 
@@ -230,6 +219,10 @@ var Entity = exports.Entity = function (_ModelBase) {
 
             if (field.relation) {
               relations.add(field.name);
+            }
+
+            if (field.indexed) {
+              indexed.add(field.name);
             }
           });
 
@@ -357,6 +350,11 @@ var Entity = exports.Entity = function (_ModelBase) {
     key: 'fields',
     get: function get() {
       return this.$obj ? this.$obj.fields : undefined;
+    }
+  }, {
+    key: 'indexed',
+    get: function get() {
+      return this.$obj ? this.$obj.indexed : undefined;
     }
   }]);
 
