@@ -66,6 +66,15 @@ var Field = exports.Field = function (_FieldBase) {
   }
 
   _createClass(Field, [{
+    key: 'makeIdentity',
+
+
+    // this is to make sure that if we internally set
+    value: function makeIdentity() {
+      this.$obj.idKey = new _ref.Ref(this.$obj.entity, this.$obj.name);
+      this.$obj.indexed = this.$obj.identity = this.$obj.identity_ = true;
+    }
+  }, {
     key: 'updateWith',
     value: function updateWith(obj) {
       if (obj) {
@@ -172,24 +181,16 @@ var Field = exports.Field = function (_FieldBase) {
     key: 'identity',
     get: function get() {
       return this.$obj ? this.$obj.identity : undefined;
-    },
-    set: function set(value) {
-      if (value) {
-        this.$obj.idKey = new _ref.Ref(this.$obj.entity, this.$obj.name);
-      } else {
-        this.$obj.idKey = undefined;
-      }
-      this.$obj.identity = this.$obj.identity_ = value;
     }
   }, {
     key: 'required',
     get: function get() {
-      return this.$obj ? this.$obj.required : undefined;
+      return this.$obj ? this.$obj.required || this.$obj.required_ : undefined;
     }
   }, {
     key: 'indexed',
     get: function get() {
-      return this.$obj ? this.$obj.indexed : undefined;
+      return this.$obj ? this.$obj.indexed || this.$obj.indexed_ : undefined;
     }
   }, {
     key: 'idKey',

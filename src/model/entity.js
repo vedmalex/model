@@ -207,7 +207,8 @@ export class Entity extends ModelBase {
           fields.set(f.name, f);
         }
 
-        f.identity = true;
+        f.makeIdentity();
+        indexed.add(f.name);
         identity.add(f.name);
         required.add(f.name);
       }

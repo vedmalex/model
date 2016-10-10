@@ -43,21 +43,18 @@ export class Field extends FieldBase {
     return this.$obj ? this.$obj.identity : undefined;
   }
 
-  set identity(value) {
-    if (value) {
-      this.$obj.idKey = new Ref(this.$obj.entity, this.$obj.name);
-    } else {
-      this.$obj.idKey = undefined;
-    }
-    this.$obj.identity = this.$obj.identity_ = value;
+  // this is to make sure that if we internally set
+  makeIdentity() {
+    this.$obj.idKey = new Ref(this.$obj.entity, this.$obj.name);
+    this.$obj.indexed = this.$obj.identity = this.$obj.identity_ = true;
   }
 
   get required() {
-    return this.$obj ? this.$obj.required : undefined;
+    return this.$obj ? (this.$obj.required || this.$obj.required_) : undefined;
   }
 
   get indexed() {
-    return this.$obj ? this.$obj.indexed : undefined;
+    return this.$obj ? (this.$obj.indexed || this.$obj.indexed_) : undefined;
   }
 
   get idKey() {

@@ -237,7 +237,8 @@ var Entity = exports.Entity = function (_ModelBase) {
               fields.set(f.name, f);
             }
 
-            f.identity = true;
+            f.makeIdentity();
+            indexed.add(f.name);
             identity.add(f.name);
             required.add(f.name);
           }
@@ -245,6 +246,7 @@ var Entity = exports.Entity = function (_ModelBase) {
           result.relations = relations;
           result.identity = identity;
           result.required = required;
+          result.indexed = indexed;
           result.fields = fields;
 
           _this5.$obj = _extends({}, result);
